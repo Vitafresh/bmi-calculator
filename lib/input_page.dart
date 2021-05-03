@@ -1,4 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+const double bottomContainerHeight = 50;
+const bottomContinerColor = Color(0xFFEB1555);
+const Color activeCardColor = Color(0xFF1D1F33);
+
 
 class InputPage extends StatefulWidget {
   InputPage({Key key, this.title}) : super(key: key);
@@ -33,16 +39,65 @@ class _InputPageState extends State<InputPage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body:
-            Container(
-              margin: EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                color: Color(0xFF1D1F33),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              height: 200,
-              width: 170,
+      body: Column(
+        children: [
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: ReusableCard(cardColor: activeCardColor),
+                ),
+                Expanded(
+                  child: ReusableCard(cardColor: activeCardColor),
+                ),
+              ],
             ),
+          ),
+          Expanded(
+            child: ReusableCard(cardColor: activeCardColor),
+          ),
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: ReusableCard(cardColor: activeCardColor),
+                ),
+                Expanded(
+                  child: ReusableCard(cardColor: activeCardColor),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 10),
+            decoration: BoxDecoration(
+              color: bottomContinerColor,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            width: double.infinity,
+            height: bottomContainerHeight,
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class ReusableCard extends StatelessWidget {
+  ReusableCard({@required this.cardColor, this.cardChild});
+  final Color cardColor;
+  final Widget cardChild;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: cardChild,
+      margin: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        //0xFF1D1F33
+        color: cardColor,
+        borderRadius: BorderRadius.circular(10),
+      ),
     );
   }
 }
