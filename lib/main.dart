@@ -13,7 +13,7 @@ class BmiCalculator extends StatelessWidget {
       title: 'Bmi Calculator',
       theme: ThemeData.dark().copyWith(
         primaryColor: Color(0xFF0A0D22),
-        scaffoldBackgroundColor: Color(0xFF111428),
+        scaffoldBackgroundColor: Color(0xFF0A0D22),
         //textTheme: TextTheme(bodyText2: TextStyle(color: Colors.white)),
       ),
       // ThemeData.dark(),

@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'icon_content.dart';
+import 'reusable_card.dart';
 
 const double bottomContainerHeight = 50;
 const bottomContinerColor = Color(0xFFEB1555);
 const Color activeCardColor = Color(0xFF1D1F33);
-
+const Color inActiveCardColor = Color(0xFF111328);
 
 class InputPage extends StatefulWidget {
   InputPage({Key key, this.title}) : super(key: key);
@@ -25,6 +28,9 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Color maleCardColor = inActiveCardColor;
+  Color femaleCardColor = inActiveCardColor;
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -45,10 +51,28 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: [
                 Expanded(
-                  child: ReusableCard(cardColor: activeCardColor),
+                  child: GestureDetector(
+                    onTap: () {
+                      print("Male selected");
+                    },
+                    child: ReusableCard(
+                      cardColor: inActiveCardColor,
+                      cardChild: IconAndLabel(
+                          icon: FontAwesomeIcons.mars, label: "MALE"),
+                    ),
+                  ),
                 ),
                 Expanded(
-                  child: ReusableCard(cardColor: activeCardColor),
+                  child: GestureDetector(
+                    onTap: () {
+                      print("FeMale selected");
+                    },
+                    child: ReusableCard(
+                      cardColor: inActiveCardColor,
+                      cardChild: IconAndLabel(
+                          icon: FontAwesomeIcons.venus, label: "FEMALE"),
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -78,25 +102,6 @@ class _InputPageState extends State<InputPage> {
             height: bottomContainerHeight,
           )
         ],
-      ),
-    );
-  }
-}
-
-class ReusableCard extends StatelessWidget {
-  ReusableCard({@required this.cardColor, this.cardChild});
-  final Color cardColor;
-  final Widget cardChild;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: cardChild,
-      margin: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        //0xFF1D1F33
-        color: cardColor,
-        borderRadius: BorderRadius.circular(10),
       ),
     );
   }
