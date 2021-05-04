@@ -5,8 +5,6 @@ import 'icon_content.dart';
 import 'reusable_card.dart';
 import 'constants.dart';
 
-
-
 enum Gender { male, female }
 
 class InputPage extends StatefulWidget {
@@ -28,9 +26,15 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Color maleCardColor = kInActiveCardColor;
-  Color femaleCardColor = kInActiveCardColor;
+  Color _maleCardColor = kInActiveCardColor;
+  Color _femaleCardColor = kInActiveCardColor;
+  int _height = 175;
+
   Gender selectedGender;
+
+  void sliderChanged(double sliderValue) {
+    print('Slider changed');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +51,7 @@ class _InputPageState extends State<InputPage> {
         title: Text(widget.title),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
             child: Row(
@@ -56,15 +61,15 @@ class _InputPageState extends State<InputPage> {
                     onPress: () {
                       setState(() {
                         // selectedGender=Gender.male;
-                        maleCardColor = (maleCardColor == kActiveCardColor)
+                        _maleCardColor = (_maleCardColor == kActiveCardColor)
                             ? kInActiveCardColor
                             : kActiveCardColor;
-                        femaleCardColor = kInActiveCardColor;
+                        _femaleCardColor = kInActiveCardColor;
                       });
                       print("Male selected");
                     },
                     //cardColor: (selectedGender==Gender.male) ? activeCardColor : inActiveCardColor,
-                    cardColor: maleCardColor,
+                    cardColor: _maleCardColor,
                     cardChild: IconAndLabel(
                         icon: FontAwesomeIcons.mars, label: "ПАЦАН"),
                   ),
@@ -75,14 +80,15 @@ class _InputPageState extends State<InputPage> {
                       print("FeMale selected");
                       setState(() {
                         // selectedGender = Gender.female;
-                        femaleCardColor = (femaleCardColor == kActiveCardColor)
-                            ? kInActiveCardColor
-                            : kActiveCardColor;
-                        maleCardColor = kInActiveCardColor;
+                        _femaleCardColor =
+                            (_femaleCardColor == kActiveCardColor)
+                                ? kInActiveCardColor
+                                : kActiveCardColor;
+                        _maleCardColor = kInActiveCardColor;
                       });
                     },
                     //cardColor: (selectedGender==Gender.female) ? activeCardColor : inActiveCardColor,
-                    cardColor: femaleCardColor,
+                    cardColor: _femaleCardColor,
                     cardChild: IconAndLabel(
                         icon: FontAwesomeIcons.venus, label: "ДЕВКА"),
                   ),
@@ -94,7 +100,49 @@ class _InputPageState extends State<InputPage> {
             child: ReusableCard(
               cardColor: kActiveCardColor,
               cardChild: Column(
-                children: [Text('HEIGHT')],
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'РОСТ',
+                    style: kLabelTextStyle,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: [
+                      Text(
+                        _height.toString(),
+                        style: kNumberTextStyle,
+                      ),
+                      Text(
+                        ' cm',
+                        style: kLabelTextStyle,
+                      )
+                    ],
+                  ),
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      activeTrackColor: Colors.white,
+                      inactiveTrackColor: Color(0xFF8D8E89),
+                      thumbColor: Color(0xFFEB1555),
+                      overlayColor: Color(0x29EB1555),
+                      //with 0x29 (or 16%) transparency
+                      thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12),
+                      overlayShape: RoundSliderOverlayShape(overlayRadius: 25),
+                    ),
+                    child: Slider(
+                      value: _height.toDouble(),
+                      min: 120,
+                      max: 220,
+                      onChanged: (double sliderValue) {
+                        setState(() {
+                          _height = sliderValue.round();
+                        });
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
