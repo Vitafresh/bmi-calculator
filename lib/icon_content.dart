@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
+import 'constants.dart';
 
-const double iconSize = 70;
-const labelTextStyle = TextStyle(fontSize: 18, color: Color(0xFF8D8E98));
-const double sizedBoxHeight = 10;
 
 class IconAndLabel extends StatelessWidget {
   IconAndLabel({this.icon, this.label});
@@ -16,14 +14,14 @@ class IconAndLabel extends StatelessWidget {
         Icon(
           //FontAwesomeIcons.mars,
           icon,
-          size: iconSize,
+          size: kIconSize,
         ),
         SizedBox(
-          height: sizedBoxHeight,
+          height: kSizedBoxHeight,
         ),
         Text(
           label,
-          style: labelTextStyle,
+          style: kLabelTextStyle,
         )
       ],
     );

@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'icon_content.dart';
 import 'reusable_card.dart';
+import 'constants.dart';
 
-const double bottomContainerHeight = 50;
-const bottomContinerColor = Color(0xFFEB1555);
-const Color activeCardColor = Color(0xFF1D1F33);
-const Color inActiveCardColor = Color(0xFF111328);
+
 
 enum Gender { male, female }
 
@@ -30,10 +28,9 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Color maleCardColor = inActiveCardColor;
-  Color femaleCardColor = inActiveCardColor;
+  Color maleCardColor = kInActiveCardColor;
+  Color femaleCardColor = kInActiveCardColor;
   Gender selectedGender;
-
 
   @override
   Widget build(BuildContext context) {
@@ -56,11 +53,13 @@ class _InputPageState extends State<InputPage> {
               children: [
                 Expanded(
                   child: ReusableCard(
-                    onPress: (){
+                    onPress: () {
                       setState(() {
                         // selectedGender=Gender.male;
-                        maleCardColor = (maleCardColor == activeCardColor) ? inActiveCardColor : activeCardColor;
-                        femaleCardColor=inActiveCardColor;
+                        maleCardColor = (maleCardColor == kActiveCardColor)
+                            ? kInActiveCardColor
+                            : kActiveCardColor;
+                        femaleCardColor = kInActiveCardColor;
                       });
                       print("Male selected");
                     },
@@ -71,37 +70,42 @@ class _InputPageState extends State<InputPage> {
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
+                  child: ReusableCard(
+                    onPress: () {
                       print("FeMale selected");
                       setState(() {
                         // selectedGender = Gender.female;
-                        femaleCardColor=(femaleCardColor==activeCardColor) ? inActiveCardColor : activeCardColor;
-                        maleCardColor=inActiveCardColor;
+                        femaleCardColor = (femaleCardColor == kActiveCardColor)
+                            ? kInActiveCardColor
+                            : kActiveCardColor;
+                        maleCardColor = kInActiveCardColor;
                       });
                     },
-                    child: ReusableCard(
-                      //cardColor: (selectedGender==Gender.female) ? activeCardColor : inActiveCardColor,
-                      cardColor: femaleCardColor,
-                      cardChild: IconAndLabel(
-                          icon: FontAwesomeIcons.venus, label: "ДЕВКА"),
-                    ),
+                    //cardColor: (selectedGender==Gender.female) ? activeCardColor : inActiveCardColor,
+                    cardColor: femaleCardColor,
+                    cardChild: IconAndLabel(
+                        icon: FontAwesomeIcons.venus, label: "ДЕВКА"),
                   ),
                 ),
               ],
             ),
           ),
           Expanded(
-            child: ReusableCard(cardColor: activeCardColor),
+            child: ReusableCard(
+              cardColor: kActiveCardColor,
+              cardChild: Column(
+                children: [Text('HEIGHT')],
+              ),
+            ),
           ),
           Expanded(
             child: Row(
               children: [
                 Expanded(
-                  child: ReusableCard(cardColor: activeCardColor),
+                  child: ReusableCard(cardColor: kActiveCardColor),
                 ),
                 Expanded(
-                  child: ReusableCard(cardColor: activeCardColor),
+                  child: ReusableCard(cardColor: kActiveCardColor),
                 ),
               ],
             ),
@@ -109,11 +113,11 @@ class _InputPageState extends State<InputPage> {
           Container(
             margin: EdgeInsets.only(top: 10),
             decoration: BoxDecoration(
-              color: bottomContinerColor,
+              color: kBottomContainerColor,
               borderRadius: BorderRadius.circular(10),
             ),
             width: double.infinity,
-            height: bottomContainerHeight,
+            height: kBottomContainerHeight,
           )
         ],
       ),
