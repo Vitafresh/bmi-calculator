@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'icon_content.dart';
 import 'reusable_card.dart';
+import 'round_icon_button.dart';
 import 'constants.dart';
 
 enum Gender { male, female }
@@ -29,6 +30,8 @@ class _InputPageState extends State<InputPage> {
   Color _maleCardColor = kInActiveCardColor;
   Color _femaleCardColor = kInActiveCardColor;
   int _height = 175;
+  int _weight = 60;
+  int _age = 30;
 
   Gender selectedGender;
 
@@ -129,6 +132,7 @@ class _InputPageState extends State<InputPage> {
                       setState(() {
                         _height = sliderValue.round();
                       });
+                      //_height = sliderValue.round();
                     },
                   ),
                 ],
@@ -139,10 +143,75 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: [
                 Expanded(
-                  child: ReusableCard(cardColor: kActiveCardColor),
+                  child: ReusableCard(
+                    cardColor: kActiveCardColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'ВЕС',
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          _weight.toString(),
+                          style: kNumberTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(icon: FontAwesomeIcons.minus,
+                            onPressed: (){
+                              setState(() {
+                                _weight--;
+                              });
+                            },),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            RoundIconButton(icon: FontAwesomeIcons.plus,
+                            onPressed: (){
+                              setState(() {
+                                _weight++;
+                              });
+                            },),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
                 ),
                 Expanded(
-                  child: ReusableCard(cardColor: kActiveCardColor),
+                  child: ReusableCard(cardColor: kActiveCardColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('ВОЗРАСТ',style: kLabelTextStyle,),
+                        Text(_age.toString(),style: kNumberTextStyle,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(
+                                icon: FontAwesomeIcons.minus,
+                                onPressed: (){
+                                  setState(() {
+                                    _age--;
+                                  });
+                                },
+                            ),
+                            SizedBox(width: 10,),
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.plus,
+                              onPressed: (){
+                                setState(() {
+                                  _age++;
+                                });
+                              },
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -155,9 +224,25 @@ class _InputPageState extends State<InputPage> {
             ),
             width: double.infinity,
             height: kBottomContainerHeight,
+            child: Center(
+              child: TextButton(
+                onPressed: () {
+                  print('Calculate pressed');
+                },
+                child: Text(
+                  'РАСЧЕТ',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 25,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ),
+            ),
           )
         ],
       ),
     );
   }
 }
+
