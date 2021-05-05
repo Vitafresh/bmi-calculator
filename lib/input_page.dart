@@ -51,7 +51,7 @@ class _InputPageState extends State<InputPage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text("widget.title"),
+        title: Text(kTitleApp),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -216,27 +216,26 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            margin: EdgeInsets.only(top: 10),
-            decoration: BoxDecoration(
-              color: kBottomContainerColor,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            width: double.infinity,
-            height: kBottomContainerHeight,
-            child: Center(
-              child: TextButton(
-                onPressed: () {
-                  print('Calculate pressed');
-                  Navigator.pushNamed(context, '/results');
-                },
-                child: Text(
-                  'РАСЧЕТ',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
-                    fontWeight: FontWeight.w900,
-                  ),
+          GestureDetector(
+            onTap: (){
+              print('Calculate pressed');
+              Navigator.pushNamed(context, '/results');
+            },
+            child: Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.only(top: 10),
+              decoration: BoxDecoration(
+                color: kBottomContainerColor,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              width: double.infinity,
+              height: kBottomContainerHeight,
+              child: Text(
+                'РАСЧЕТ',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontWeight: FontWeight.w900,
                 ),
               ),
             ),

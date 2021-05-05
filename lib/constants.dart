@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+const String kTitleApp = "BMI Calculator";
 const double kIconSize = 70;
 const double kSizedBoxHeight = 10;
 
@@ -11,4 +12,3 @@ const Color kInActiveCardColor = Color(0xFF111328);
 const kLabelTextStyle = TextStyle(
     fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF8D8E98));
 const kNumberTextStyle = TextStyle(fontSize: 50, fontWeight: FontWeight.w900);
-

@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/constants.dart';
 import 'package:flutter/material.dart';
 import 'input_page.dart';
 import 'input_page.dart';
@@ -32,7 +33,7 @@ class BmiCalculator extends StatelessWidget {
       //   // This is the theme of your application.
       //   primarySwatch: Colors.amber,
       // ),
-      //home: InputPage(title: 'BMI CALCULATOR'),
+      //home: InputPage(title: kTitleApp),
 
       initialRoute: "/",
       routes: {
