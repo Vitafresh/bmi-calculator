@@ -51,7 +51,7 @@ class _InputPageState extends State<InputPage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text("widget.title"),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -228,6 +228,7 @@ class _InputPageState extends State<InputPage> {
               child: TextButton(
                 onPressed: () {
                   print('Calculate pressed');
+                  Navigator.pushNamed(context, '/results');
                 },
                 child: Text(
                   'РАСЧЕТ',
