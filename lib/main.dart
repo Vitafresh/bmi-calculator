@@ -1,8 +1,7 @@
 import 'package:bmi_calculator/constants.dart';
 import 'package:flutter/material.dart';
-import 'input_page.dart';
-import 'input_page.dart';
-import 'results_page.dart';
+import 'screens/input_page.dart';
+import 'screens/results_page.dart';
 
 void main() {
   runApp(BmiCalculator());
@@ -13,7 +12,7 @@ class BmiCalculator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Bmi Calculator',
+      title: kTitleApp,
       theme: ThemeData.dark().copyWith(
         sliderTheme: SliderTheme.of(context).copyWith(
           activeTrackColor: Colors.white,
@@ -35,7 +34,8 @@ class BmiCalculator extends StatelessWidget {
       // ),
       //home: InputPage(title: kTitleApp),
 
-      initialRoute: "/",
+      initialRoute: "/", //Main screen, loads at startup
+      //screens route, e.d. Map of labels and corresponding screens
       routes: {
         "/" : (context)=>InputPage(),
         "/results":(context)=>ResultsPage()

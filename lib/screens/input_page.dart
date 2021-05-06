@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'icon_content.dart';
-import 'reusable_card.dart';
-import 'round_icon_button.dart';
-import 'constants.dart';
+import '../components/icon_content.dart';
+import '../components/reusable_card.dart';
+import '../components/round_icon_button.dart';
+import '../components/bottom_button.dart';
+import '../constants.dart';
 
 enum Gender { male, female }
 
@@ -216,33 +217,18 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          GestureDetector(
+          BottomButton(
             onTap: (){
               print('Calculate pressed');
               Navigator.pushNamed(context, '/results');
             },
-            child: Container(
-              alignment: Alignment.center,
-              margin: EdgeInsets.only(top: 10),
-              decoration: BoxDecoration(
-                color: kBottomContainerColor,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              width: double.infinity,
-              height: kBottomContainerHeight,
-              child: Text(
-                'РАСЧЕТ',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 25,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-            ),
+            buttonTitle: "РАСЧЕТ",
           )
         ],
       ),
     );
   }
 }
+
+
 
