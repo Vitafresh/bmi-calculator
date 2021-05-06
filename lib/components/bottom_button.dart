@@ -15,7 +15,7 @@ class BottomButton extends StatelessWidget {
         margin: EdgeInsets.only(top: 10),
         decoration: BoxDecoration(
           color: kBottomContainerColor,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(20),
         ),
         width: double.infinity,
         height: kBottomContainerHeight,

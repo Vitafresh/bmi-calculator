@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/screens/results_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -6,6 +7,7 @@ import '../components/reusable_card.dart';
 import '../components/round_icon_button.dart';
 import '../components/bottom_button.dart';
 import '../constants.dart';
+import 'package:bmi_calculator/calc_brain.dart';
 
 enum Gender { male, female }
 
@@ -160,21 +162,25 @@ class _InputPageState extends State<InputPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            RoundIconButton(icon: FontAwesomeIcons.minus,
-                            onPressed: (){
-                              setState(() {
-                                _weight--;
-                              });
-                            },),
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.minus,
+                              onPressed: () {
+                                setState(() {
+                                  _weight--;
+                                });
+                              },
+                            ),
                             SizedBox(
                               width: 10,
                             ),
-                            RoundIconButton(icon: FontAwesomeIcons.plus,
-                            onPressed: (){
-                              setState(() {
-                                _weight++;
-                              });
-                            },),
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.plus,
+                              onPressed: () {
+                                setState(() {
+                                  _weight++;
+                                });
+                              },
+                            ),
                           ],
                         )
                       ],
@@ -182,27 +188,36 @@ class _InputPageState extends State<InputPage> {
                   ),
                 ),
                 Expanded(
-                  child: ReusableCard(cardColor: kActiveCardColor,
+                  child: ReusableCard(
+                    cardColor: kActiveCardColor,
                     cardChild: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('ВОЗРАСТ',style: kLabelTextStyle,),
-                        Text(_age.toString(),style: kNumberTextStyle,),
+                        Text(
+                          'ВОЗРАСТ',
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          _age.toString(),
+                          style: kNumberTextStyle,
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             RoundIconButton(
-                                icon: FontAwesomeIcons.minus,
-                                onPressed: (){
-                                  setState(() {
-                                    _age--;
-                                  });
-                                },
+                              icon: FontAwesomeIcons.minus,
+                              onPressed: () {
+                                setState(() {
+                                  _age--;
+                                });
+                              },
                             ),
-                            SizedBox(width: 10,),
+                            SizedBox(
+                              width: 10,
+                            ),
                             RoundIconButton(
                               icon: FontAwesomeIcons.plus,
-                              onPressed: (){
+                              onPressed: () {
                                 setState(() {
                                   _age++;
                                 });
@@ -218,9 +233,20 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           BottomButton(
-            onTap: (){
+            onTap: () {
               print('Calculate pressed');
-              Navigator.pushNamed(context, '/results');
+
+              CalcBrain calcBrain = CalcBrain(height: _height, weight: _weight);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ResultsPage(
+                      bmiResult: calcBrain.calcBMI(),
+                      resultText: calcBrain.getResult(),
+                      interpret: calcBrain.getInterpretation(),
+                    ),
+                  ));
+              //Navigator.pushNamed(context, '/results');
             },
             buttonTitle: "РАСЧЕТ",
           )
@@ -229,6 +255,3 @@ class _InputPageState extends State<InputPage> {
     );
   }
 }
-
-
-
